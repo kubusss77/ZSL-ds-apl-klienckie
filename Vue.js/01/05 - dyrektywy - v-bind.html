@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <a v-bind:href="onet_url">ONET</a>
+      <img
+        v-bind:width="img_width"
+        v-bind:height="img_height"
+        v-bind:src="img_src"
+      />
+    </div>
+  </body>
+  <script>
+    const app = Vue.createApp({
+      data() {
+        return {
+          onet_url: "http://onet.pl",
+          img_width: 100,
+          img_height: 100,
+          img_src: "gfx/google.png",
+        };
+      },
+    }).mount("#app");
+
+    app.title += " of film";
+  </script>
+</html>

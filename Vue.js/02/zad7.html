@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VueJS 02 zad 5</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+</head>
+
+<body>
+    <div id="app">
+        <h2>{{ computed }} </h2>
+        <h2>{{ computed }} </h2>
+        <h2>{{ computed }} </h2>
+
+        <h2>{{ method() }} </h2>
+        <h2>{{ method() }} </h2>
+        <h2>{{ method() }} </h2>
+    </div>
+</body>
+<script>
+    const app = Vue.createApp({
+
+
+        data() {
+            return {
+                number: 100,
+            }
+        },
+        computed: {
+            computed() {
+                const ret = 'COMPUTED: Liczba: ' + this.number + ', random: ' + Math.random() + ', sekunda: ' + new Date().getSeconds()
+                console.log(ret)
+                return ret
+            }
+        },
+        methods: {
+            method() {
+                const ret = 'METHOD: Liczba: ' + this.number + ', random: ' + Math.random() + ', sekunda: ' + new Date().getSeconds()
+                console.log(ret)
+                return ret
+            }
+        }
+    }).mount("#app")
+
+</script>
+
+</html>

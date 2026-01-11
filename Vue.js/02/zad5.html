@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VueJS 02 zad 5</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+</head>
+
+<body>
+    <div id="app">
+        <p>Lista produktów ({{ products.length }} szt):</p>
+        <ul>
+            <li v-for="product in products">{{ product.name }} (ID: {{product.id}}) | Cena: {{product.price }} zł |
+                kategoria: {{product.category}}</li>
+        </ul>
+
+        <p>1. Produkty premium:</p>
+        <ul>
+            <li v-for=" product in getPremiumProducts(50)">{{product.name}} - {{product.price}} zł</li>
+        </ul>
+
+        <p>2. Lista nazw i zmodyfikowanych cen:</p>
+        <ul>
+            <li v-for="product in getMappedPrices(0.9)">{{product.name}} | Nowa cena: {{product.newPrice}} zł</li>
+        </ul>
+
+        <p>3. Całkowica wartość magazynu</p>
+        <p>{{getTotalValue()}} zł</p>
+
+        <p>4. Wartośc produktów elektronicznych</p>
+        <p>{{getCategoryValue('Elektronika')}} zł</p>
+    </div>
+</body>
+<script>
+    const app = Vue.createApp({
+
+        data() {
+            return {
+                products: [
+                    { id: 1, name: "Książka 'VueJS'", price: 35.99, category: "Książki" },
+                    { id: 2, name: "Słuchawki Pro", price: 129.99, category: "Elektronika" },
+                    { id: 3, name: "Myszka bezprzewodowa", price: 49.50, category: "Elektronika" },
+                    { id: 4, name: "Zeszyt A4", price: 8.00, category: "Artykuły" },
+                    { id: 5, name: "Monitor 4K", price: 999.00, category: "Elektronika" }
+                ]
+            }
+        },
+
+        methods: {
+            getPremiumProducts(minPrice) {
+                return this.products.filter(product => product.price > minPrice);
+            },
+
+            getMappedPrices(multiplier) {
+                return this.products.map(product => ({
+                    name: product.name,
+                    newPrice: (product.price * multiplier).toFixed(2)
+                }))
+            },
+
+            getTotalValue() {
+                return this.products.reduce((sum, product) => sum + product.price, 0)
+            },
+
+            getCategoryValue(categoryName) {
+                const filtered = this.products.filter(product => product.category == categoryName)
+                return filtered.reduce((sum, product) => sum + product.price, 0)
+            }
+        }
+    }).mount("#app")
+
+</script>
+
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VueJS 02 zad 5</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <style>
+        #vue-imgs {
+            display: flex;
+        }
+
+        #vue-imgs img {
+            width: 100px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <h2>przykład</h2>
+        <div id="vue-imgs">
+            <a v-bind:href="link">
+                <img v-bind:src="image" />
+            </a>
+            <a v-bind:href="getLink()">
+                <img v-bind:src="getImage()" />
+            </a>
+            <a :href="getLink()">
+                <img v-bind:src="getImage()" />
+            </a>
+        </div>
+
+        <div id="cars">
+
+        </div>
+    </div>
+</body>
+<script>
+    const app = Vue.createApp({
+        data() {
+            return {
+                link: "https://vuejs.org/",
+                image: "https://vuejs.org/images/logo.png",
+                cars: [
+                    {
+                        id: '0',
+                        brand: 'Ford',
+                        model: 'Focus',
+                        year: '2018'
+                    },
+                    {
+                        id: '1',
+                        brand: 'Dodge',
+                        model: 'Challenger',
+                        year: '2020'
+                    },
+                    {
+                        id: '2',
+                        brand: 'Mercedes',
+                        model: 'E-klasa',
+                        year: '2018'
+                    },
+                    {
+                        id: '3',
+                        brand: 'Opel',
+                        model: 'Corsa',
+                        year: '2010'
+                    },
+                    {
+                        id: '4',
+                        brand: 'Peugeot',
+                        model: '205',
+                        year: '1990'
+                    },
+                ]
+            }
+        },
+
+        methods: {
+            getLink() {
+                return this.link
+            },
+            getImage() {
+                return this.image
+            },
+
+            getCarData(id) {
+                return this.cars[id];
+            },
+            getCarImage(id) {
+
+            }
+
+        }
+    }).mount("#app")
+
+</script>
+
+</html>

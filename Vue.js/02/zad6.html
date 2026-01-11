@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VueJS 02 zad 5</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+</head>
+
+<body>
+    <div id="app">
+        <h2>samochód: {{ getCar}} </h2>
+        <h2>rok produkcji: {{getYear }} </h2>
+
+        <h2>samochód: {{ getCar}} </h2>
+        <h2>rok produkcji: {{getYear }} </h2>
+
+        <h2>samochód: {{ getCarM()}} </h2>
+        <h2>rok produkcji: {{getYearM() }} </h2>
+
+        <h2>samochód: {{ getCarM()}} </h2>
+        <h2>rok produkcji: {{getYearM() }} </h2>
+    </div>
+</body>
+<script>
+    const app = Vue.createApp({
+
+
+        data() {
+            return {
+                type: "Fiat",
+                year: 1989,
+                model: "Panda"
+            }
+        },
+        computed: {
+            getCar() {
+                const car = "To jest auto: " + this.type + "" + this.model
+                console.log(car)
+                return this.type + ' ' + this.model
+            },
+            getYear() {
+                const year = "To jest rok: " + this.year
+                console.log(year)
+                return year
+            }
+        },
+        methods: {
+            getCarM() {
+                const car = "To jest auto: " + this.type + "" + this.model
+                console.log('m', car)
+                return this.type + ' ' + this.model
+            },
+            getYearM() {
+                const year = "To jest rok: " + this.year
+                console.log('m', year)
+                return year
+            }
+        }
+    }).mount("#app")
+
+</script>
+
+</html>

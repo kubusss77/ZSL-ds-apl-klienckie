@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VueJS 02 zad 01</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+</head>
+
+<body>
+    <div id="app">
+        <li v-for="item in array">{{item}}</li>
+
+
+    </div>
+</body>
+<script>
+    const app = Vue.createApp({
+
+        data() {
+            return {
+                array: [1, 2, 3, 4, 5],
+                array2: ["d", "b", "c", "a"]
+            }
+        }
+    }).mount("#app")
+
+</script>
+
+</html>

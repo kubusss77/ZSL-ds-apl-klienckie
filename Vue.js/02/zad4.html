@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VueJS 02 zad 4</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+</head>
+
+<body>
+    <div id="app">
+        <p>tekst: {{ text }}</p>
+        <h2>długość tekstu: {{ getTextLength2() }}</h2>
+        <h2>długość tekstu: {{ getTextLength(text) }}</h2>
+
+        <h2 v-text="getTextLength(text)"></h2>
+        <h2 v-html="getTextLengthWithHTML()"></h2>
+    </div>
+</body>
+<script>
+    const app = Vue.createApp({
+
+        data() {
+            return {
+                text: "to jest tekst",
+                length: 0
+            }
+        },
+
+        methods: {
+            getTextLength(val) {
+                return val.length
+            },
+            getTextLength2() {
+                return this.text.length
+            },
+            getTextLengthWithHTML() {
+                return "długość text: " + this.text.length
+            },
+            setLength(val) {
+                this.length = val
+            }
+        }
+    }).mount("#app")
+
+</script>
+
+</html>
