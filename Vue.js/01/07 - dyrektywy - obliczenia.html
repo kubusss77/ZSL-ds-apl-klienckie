@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <h2>{{ Math.pow(2,5) }}</h2>
+      <h2>{{ new Date().getTime() }}</h2>
+      <h2>{{ Math.random() }}</h2>
+      <h2>{{x > 5 ? "tak" : "nie"}}</h2>
+      <h2 v-text="y.length < 5 ? 'tak' : 'nie'"></h2>
+    </div>
+  </body>
+  <script>
+    Vue.createApp({
+      data() {
+        return {
+          x: 100,
+          y: 'test',
+        };
+      },
+    }).mount('#app');
+  </script>
+</html>

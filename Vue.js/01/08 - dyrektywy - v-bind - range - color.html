@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <input type="range" v-model="fontSize" min="20" max="100" />
+      <input type="color" v-model="fontColor" />
+      <input type="color" v-model="backColor" />
+      <div :style="{ fontSize: fontSize + 'px', color: fontColor, backgroundColor: backColor }">element</div>
+    </div>
+  </body>
+  <script>
+    Vue.createApp({
+      data() {
+        return {
+          fontSize: 16,
+          fontColor: '#000000',
+          backColor: '#ffffff',
+        };
+      },
+    }).mount('#app');
+  </script>
+</html>
