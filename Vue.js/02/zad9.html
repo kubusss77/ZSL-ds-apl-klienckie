@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>VueJS 02 zad 09</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <style>
+      #products {
+        display: flex;
+        flex-wrap: wrap;
+      }
+
+      .product {
+        height: 200px;
+        width: 100px;
+        padding: 20px;
+        text-align: center;
+        box-shadow: 10px 10px 20px lightgray;
+        margin: 10px;
+        border: 5px solid white;
+      }
+
+      .product-price-high {
+        color: lightcoral;
+      }
+
+      .product-price-low {
+        color: lightgreen;
+      }
+
+      .product-limited {
+        border-color: cornflowerblue;
+      }
+
+      .product-sale {
+        border-color: lightgreen;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <div id="products">
+        <div
+          v-for="product in products"
+          class="product"
+          :class="product.sale ? 'product-sale' : '', product.limited ? 'product-limited' : ''"
+        >
+          <img src="" :alt="'Brak zdjęcia dla produktu: ' + product.name" />
+          <p>{{product.name}} | {{product.category}}</p>
+          <p style="font-size: 32px" :class="getPriceClass(product.price)">$ {{product.price}}</p>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script>
+    const app = Vue.createApp({
+      data() {
+        return {
+          products: [
+            { id: 1, name: 'Photoshop', category: 'grafika', price: 500, sale: false, limited: true },
+            { id: 2, name: 'Ableton', category: 'audio', price: 99, sale: true, limited: true },
+            { id: 3, name: 'Cyberpunk', category: 'gry', price: 60, sale: false, limited: false },
+            { id: 4, name: 'Cyberpunk red', category: 'gry', price: 99, sale: false, limited: false },
+            { id: 5, name: 'Wiedzmin', category: 'gry', price: 250, sale: false, limited: true },
+            { id: 6, name: 'Logic Pro', category: 'audio', price: 199, sale: true, limited: true },
+            { id: 7, name: 'Inny produkt', category: 'audio', price: 199, sale: true, limited: true },
+            { id: 8, name: 'Inny produkt 2', category: 'audio', price: 299, sale: false, limited: false },
+            { id: 9, name: 'Inny produkt 3', category: 'audio', price: 399, sale: true, limited: true },
+          ],
+        };
+      },
+
+      methods: {
+        getPriceClass(price) {
+          return price < 100 ? 'product-price-low' : 'product-price-high';
+        },
+      },
+    }).mount('#app');
+  </script>
+</html>
