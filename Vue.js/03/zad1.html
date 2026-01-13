@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue.js 03 zad 01</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <style>
+      .margin {
+        margin: 20px;
+      }
+
+      .flex {
+        display: flex;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <div @click="onClick" class="margin">CLICK ME!</div>
+      <div class="flex margin">
+        <select v-model="selected">
+          <option>[wybierz]</option>
+          <option>option 1</option>
+          <option>option 2</option>
+        </select>
+        <p>{{ selected }}</p>
+      </div>
+      <div class="flex margin">
+        <input type="range" @input="onInput" min="0" max="100" />
+        <p>{{ range }}</p>
+      </div>
+      <div class="flex margin">
+        <input type="checkbox" v-model="checkbox" />
+        <p>{{ checkbox }}</p>
+      </div>
+      <div>
+        <button @click="onButtonClick">Button 1 - powiększa wartość licznika</button>
+        <p>{{ counter }}</p>
+      </div>
+      <div>
+        <button @click="onButtonClickPower">Button 2 - liczy 2 do potęgi licznika</button>
+        <p>{{ powerValue }}</p>
+      </div>
+    </div>
+  </body>
+  <script>
+    const app = Vue.createApp({
+      data() {
+        return {
+          selected: 'not selected',
+          range: 0,
+          checkbox: false,
+          counter: 0,
+          powerCounter: 0,
+          powerValue: 0,
+        };
+      },
+      methods: {
+        onClick() {
+          console.log('CLICK');
+        },
+        onInput(e) {
+          this.range = e.target.value;
+        },
+        onButtonClick() {
+          this.counter++;
+        },
+        onButtonClickPower() {
+          this.powerValue = Math.pow(2, ++this.powerCounter);
+        },
+      },
+    }).mount('#app');
+  </script>
+</html>
