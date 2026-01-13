@@ -1,56 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>VueJS 02 zad 02</title>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 
     <style>
-        #app {
-            display: flex;
-        }
+      #app {
+        display: flex;
+      }
 
-        #app section {
-            margin: 20px;
-        }
+      #app section {
+        margin: 20px;
+      }
     </style>
-</head>
+  </head>
 
-<body>
+  <body>
     <div id="app">
-        <section>
-            <p>ul 1 - obiekty tablicy</p>
-            <ul>
-                <li v-for="item in array">{{item}}</li>
-            </ul>
-        </section>
-        <section>
-            <p>ul 2 - wartości obiektów tablicy</p>
-            <ul>
-                <li v-for="item in array">{{item.a}} {{item.b}}</li>
-            </ul>
-
-        </section>
-        <section>
-            <p>ul 3 - wartości obiektów tablicy z licznikiem</p>
-            <ul>
-                <li v-for="(item,i) in array">{{i}}: {{item.a}} {{item.b}}</li>
-            </ul>
-        </section>
+      <section>
+        <p>ul 1 - obiekty tablicy</p>
+        <ul>
+          <li v-for="item in array">{{item}}</li>
+        </ul>
+      </section>
+      <section>
+        <p>ul 2 - wartości obiektów tablicy</p>
+        <ul>
+          <li v-for="item in array">{{item.a}} {{item.b}}</li>
+        </ul>
+      </section>
+      <section>
+        <p>ul 3 - wartości obiektów tablicy z licznikiem</p>
+        <ul>
+          <li v-for="(item,i) in array">{{i}}: {{item.a}} {{item.b}}</li>
+        </ul>
+      </section>
     </div>
-</body>
-<script>
+  </body>
+  <script>
     const app = Vue.createApp({
-
-        data() {
-            return {
-                array: [{ a: 1, b: 4 }, { a: 2, b: 5 }, { a: 3, b: 6 }]
-            }
-        }
-    }).mount("#app")
-
-</script>
-
+      data() {
+        return {
+          array: [
+            { a: 1, b: 4 },
+            { a: 2, b: 5 },
+            { a: 3, b: 6 },
+          ],
+        };
+      },
+    }).mount('#app');
+  </script>
 </html>

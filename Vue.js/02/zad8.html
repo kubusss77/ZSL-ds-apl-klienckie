@@ -1,101 +1,129 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VueJS 02 zad 5</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>VueJS 02 zad 08</title>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <style>
-        #vue-imgs {
-            display: flex;
-        }
+      #vue-imgs {
+        display: flex;
+      }
 
-        #vue-imgs img {
-            width: 100px;
-        }
+      #vue-imgs img {
+        width: 100px;
+      }
+
+      #cars {
+        display: flex;
+      }
+
+      .car-box {
+        padding: 10px;
+        margin: 20px;
+      }
+
+      .car-box-light {
+        color: darkslategray;
+        background: lightgreen;
+      }
+
+      .car-box-dark {
+        color: lightgreen;
+        background: darkslategray;
+      }
+
+      .car-box img {
+        height: 200px;
+      }
     </style>
-</head>
+  </head>
 
-<body>
+  <body>
     <div id="app">
-        <h2>przykład</h2>
-        <div id="vue-imgs">
-            <a v-bind:href="link">
-                <img v-bind:src="image" />
-            </a>
-            <a v-bind:href="getLink()">
-                <img v-bind:src="getImage()" />
-            </a>
-            <a :href="getLink()">
-                <img v-bind:src="getImage()" />
-            </a>
-        </div>
+      <h2>przykład</h2>
+      <div id="vue-imgs">
+        <a v-bind:href="link">
+          <img v-bind:src="image" />
+        </a>
+        <a v-bind:href="getLink()">
+          <img v-bind:src="getImage()" />
+        </a>
+        <a :href="getLink()">
+          <img v-bind:src="getImage()" />
+        </a>
+      </div>
 
-        <div id="cars">
-
+      <h2>Zadanie</h2>
+      <div id="cars">
+        <div v-for="car in cars" class="car-box" :class="getClassName(car.year)">
+          {{car.brand}} {{car.model}} ({{car.year}})
+          <img :src="getCarImageUrl(car.id)" />
         </div>
+      </div>
     </div>
-</body>
-<script>
+  </body>
+  <script>
+    const SERVER_URL = 'http://localhost:3000';
+
     const app = Vue.createApp({
-        data() {
-            return {
-                link: "https://vuejs.org/",
-                image: "https://vuejs.org/images/logo.png",
-                cars: [
-                    {
-                        id: '0',
-                        brand: 'Ford',
-                        model: 'Focus',
-                        year: '2018'
-                    },
-                    {
-                        id: '1',
-                        brand: 'Dodge',
-                        model: 'Challenger',
-                        year: '2020'
-                    },
-                    {
-                        id: '2',
-                        brand: 'Mercedes',
-                        model: 'E-klasa',
-                        year: '2018'
-                    },
-                    {
-                        id: '3',
-                        brand: 'Opel',
-                        model: 'Corsa',
-                        year: '2010'
-                    },
-                    {
-                        id: '4',
-                        brand: 'Peugeot',
-                        model: '205',
-                        year: '1990'
-                    },
-                ]
-            }
+      data() {
+        return {
+          link: 'https://vuejs.org/',
+          image: 'https://vuejs.org/images/logo.png',
+          cars: [
+            {
+              id: '0',
+              brand: 'Ford',
+              model: 'Focus',
+              year: '2018',
+            },
+            {
+              id: '1',
+              brand: 'Dodge',
+              model: 'Challenger',
+              year: '2020',
+            },
+            {
+              id: '2',
+              brand: 'Mercedes',
+              model: 'E-klasa',
+              year: '2018',
+            },
+            {
+              id: '3',
+              brand: 'Opel',
+              model: 'Corsa',
+              year: '2010',
+            },
+            {
+              id: '4',
+              brand: 'Peugeot',
+              model: '205',
+              year: '1990',
+            },
+          ],
+        };
+      },
+
+      methods: {
+        getLink() {
+          return this.link;
+        },
+        getImage() {
+          return this.image;
         },
 
-        methods: {
-            getLink() {
-                return this.link
-            },
-            getImage() {
-                return this.image
-            },
-
-            getCarData(id) {
-                return this.cars[id];
-            },
-            getCarImage(id) {
-
-            }
-
-        }
-    }).mount("#app")
-
-</script>
-
+        getCarData(id) {
+          return this.cars[id];
+        },
+        getCarImageUrl(id) {
+          return SERVER_URL + '/gfx/cars/' + id + '.jpg';
+        },
+        getClassName(year) {
+          return year < 2000 ? 'car-box-dark' : 'car-box-light';
+        },
+      },
+    }).mount('#app');
+  </script>
 </html>
