@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <title>Vue.js 03 zad 08</title>
+    <style>
+      td,
+      th {
+        padding: 10px;
+        background: #eee;
+        border: 2px solid white;
+      }
+
+      .tdInactive {
+        text-decoration: line-through;
+        color: darkgray;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      Filtruj po imieniu: <input v-model="filteredName" type="text" @input="filterByName()" />
+      <table>
+        <tr>
+          <th>Imię</th>
+          <th>E-mail</th>
+          <th>Status</th>
+          <th>Akcje</th>
+        </tr>
+        <tr v-for="user in usersFiltered">
+          <td v-if="user.isEdited">
+            <input v-model="user.name" />
+          </td>
+          <td v-else>{{user.name}}</td>
+          <td>{{user.email}}</td>
+          <td :class="user.isActive ? 'tdActive' : 'tdInactive'">
+            <input type="checkbox" :checked="user.isActive" />
+            {{user.isActive ? 'Aktywny' : 'Nieaktywny'}}
+          </td>
+          <td>
+            <button @click="editUser(user.id)">Edytuj</button>
+            <button @click="delUser(user.id)">Usuń</button>
+          </td>
+        </tr>
+      </table>
+      <h2>Dodaj nowego użytkownika</h2>
+      <div>Imię: <input v-model="addedUser.name" /> E-mail: <input v-model="addedUser.email" /></div>
+      <button @click="addUser()">Dodaj</button>
+    </div>
+  </body>
+  <script>
+    const app = Vue.createApp({
+      data() {
+        return {
+          users: [
+            { id: 1, name: 'Anna Nowak', email: 'anna.nowak@example.com', isActive: true },
+            { id: 2, name: 'Piotr Kowalski', email: 'piotr.kowalski@example.com', isActive: false },
+            { id: 3, name: 'Ewa Wiśniewska', email: 'ewa.wisniewska@example.com', isActive: true },
+          ],
+          usersFiltered: [],
+          addedUser: {
+            name: '',
+            email: '',
+          },
+          filteredName: '',
+        };
+      },
+      methods: {
+        addUser() {
+          this.users.push({
+            id: this.users.length + 1,
+            name: this.addedUser.name,
+            email: this.addedUser.email,
+            isActive: true,
+          });
+
+          this.usersFiltered = Array.from(this.users);
+        },
+
+        editUser(id) {
+          const editedUser = this.users.find((user) => {
+            return user.id == id;
+          });
+          editedUser.isEdited = !editedUser.isEdited;
+        },
+
+        delUser(id) {
+          this.users = this.users.filter((user) => {
+            return user.id !== id;
+          });
+
+          this.usersFiltered = Array.from(this.users);
+        },
+
+        filterByName() {
+          if (this.filteredName === '') {
+            this.usersFiltered = Array.from(this.users);
+          } else {
+            this.usersFiltered = this.users.filter((a) => {
+              const bool = a.name.includes(this.filteredName);
+              return bool;
+            });
+          }
+        },
+      },
+    }).mount('#app');
+
+    app.usersFiltered = Array.from(app.users);
+  </script>
+</html>

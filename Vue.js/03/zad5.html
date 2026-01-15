@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <title>Vue.js 03 zad 05</title>
+  </head>
+  <body>
+    <div id="app">
+      <table v-if="products.length > 0">
+        <tr v-for="(item, i) of products">
+          <td>{{item.product}}</td>
+          <td @click="addToCart(i)">{{item.selected}}</td>
+        </tr>
+      </table>
+      <p v-else>brak produktów</p>
+    </div>
+  </body>
+  <script>
+    const app = Vue.createApp({
+      data() {
+        return {
+          products: [
+            { product: 'książka', price: 100, selected: 'dodaj do koszyka' },
+            { product: 'płyta CD', price: 200, selected: 'dodaj do koszyka' },
+            { product: 'mleko', price: 300, selected: 'dodaj do koszyka' },
+            { product: 'buty', price: 400, selected: 'dodaj do koszyka' },
+          ],
+        };
+      },
+      methods: {
+        addToCart(id) {
+          if (this.products[id].selected == 'w koszyku') {
+            this.products[id].selected = 'dodaj do koszyka';
+          } else {
+            this.products[id].selected = 'w koszyku';
+          }
+        },
+      },
+    }).mount('#app');
+  </script>
+</html>

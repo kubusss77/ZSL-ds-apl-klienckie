@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.15/lodash.min.js"></script>
+    <title>Vue.js 03 zad 05</title>
+    <style>
+      td,
+      th {
+        background: #eee;
+        border: 2px solid white;
+        padding: 10px;
+      }
+
+      th {
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <h1 v-if="products.length == 0">Brak produktów</h3>
+      <table v-if="products.length != 0">
+        <tr>
+          <th>id</th>
+          <th>produkt</th>
+          <th>cena</th>
+          <th>koszyk</th>
+        </tr>
+        <template v-for="product of products">
+          <tr>
+            <td>something</td>
+          </tr>
+        </template>
+        <tr>
+          <td colspan="4" style="text-align: center">
+            <button @click="sortAZ()">WG A-Z</button>
+            <button @click="sortPrice()">WG CENY</button>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </body>
+  <script>
+    const app = Vue.createApp({
+      data() {
+        return {
+          products: [
+            { product: 'książka', price: 100, selected: 'dodaj do koszyka' },
+            { product: 'płyta CD', price: 200, selected: 'dodaj do koszyka' },
+            { product: 'mleko', price: 300, selected: 'dodaj do koszyka' },
+            { product: 'buty', price: 400, selected: 'dodaj do koszyka' },
+          ],
+        };
+      },
+      methods: {
+        addToCart(id) {
+          if (this.products[id].selected == 'w koszyku') {
+            this.products[id].selected = 'dodaj do koszyka';
+          } else {
+            this.products[id].selected = 'w koszyku';
+          }
+        },
+
+        sortAZ() {
+          this.products.sort(function (a, b) {
+            if (a.product < b.product) return -1;
+            if (a.product > b.product) return 1;
+            return 0;
+          });
+        },
+
+        sortPrice() {
+          this.products.sort(function (a, b) {
+            if (a.price > b.price) {
+              return 1;
+            }
+
+            if (a.price < b.price) {
+              return -1;
+            }
+
+            return 0;
+          });
+        },
+      },
+    }).mount('#app');
+  </script>
+</html>
