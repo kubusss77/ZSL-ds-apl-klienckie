@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <title>Vue.js 03 zad 02</title>
+  </head>
+  <body>
+    <div id="app">
+      <button v-on:click="showElement">{{text}}</button>
+      <h3 v-show="show">element</h3>
+    </div>
+  </body>
+  <script>
+    Vue.createApp({
+      data() {
+        return {
+          text: 'Pokaż',
+          show: false,
+        };
+      },
+
+      methods: {
+        showElement() {
+          this.show = !this.show;
+          this.text = this.show ? 'Ukryj' : 'Pokaż';
+        },
+      },
+    }).mount('#app');
+  </script>
+</html>

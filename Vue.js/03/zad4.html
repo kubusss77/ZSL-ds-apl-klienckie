@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <title>Vue.js 03 zad 04</title>
+    <style>
+      .row {
+        display: flex;
+      }
+
+      .btn {
+        height: 2rem;
+        aspect-ratio: 1;
+        background: lightgoldenrodyellow;
+        border-radius: 5px;
+        margin: 5px;
+      }
+
+      .active {
+        background-color: yellow;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <select v-model="selected">
+        <option v-for="number in selectValues">{{number}}</option>
+      </select>
+      <div class="board">
+        <div v-for="row in array" class="row">
+          <button
+            v-for="number in row"
+            class="btn"
+            :class="number == selected ? 'active' : ''"
+            :disabled="number == selected ? false : true"
+            @click="btnClick(number)"
+          >
+            {{number}}
+          </button>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script>
+    const app = Vue.createApp({
+      data() {
+        return {
+          array: [
+            [1, 2, 3, 3, 3],
+            [4, 4, 4, 7, 1],
+            [2, 3, 3, 2, 1],
+            [5, 5, 6, 4, 3],
+            [1, 5, 1, 2, 5],
+          ],
+          selected: '',
+        };
+      },
+
+      methods: {
+        btnClick(number) {
+          alert('text in button = ' + number);
+        },
+      },
+
+      computed: {
+        selectValues() {
+          const flat = this.array.flat();
+          let unique = [];
+          flat.forEach((number) => (unique.includes(number) ? '' : unique.push(number)));
+          return unique.sort();
+        },
+      },
+    }).mount('#app');
+  </script>
+</html>
