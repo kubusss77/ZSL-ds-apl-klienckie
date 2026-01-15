@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <title>Vue.js 04 zad 02</title>
+    <style>
+      .ready {
+        background-color: lightgreen;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <form>
+        <h2>Uzupełnij dane</h2>
+        <input v-model="name" /> Długość: {{ name.length}} <br />
+        <input v-model="age" /> Długość: {{ age.length}} <br />
+        <input v-model="profesion" /> Długość: {{ profesion.length}}<br />
+        <input v-model="salary" /> Długość: {{ salary.length}}
+        <input type="submit" value="Wyślij" :disabled="!isReady" :class="isReady ? 'ready' : ''" />
+      </form>
+      <h2>Sprawdź poprawność danych</h2>
+      <p>Imię i nazwisko: {{ name }}</p>
+      <p>Wiek: {{ age }}</p>
+      <p>Zawód: {{ profesion }}</p>
+      <p>Wynagrodzenie: {{ salary }}</p>
+    </div>
+  </body>
+  <script>
+    const app = Vue.createApp({
+      data() {
+        return {
+          name: '',
+          age: '',
+          profesion: '',
+          salary: '',
+        };
+      },
+      computed: {
+        isReady() {
+          if (this.name && this.age && this.profesion && this.salary) return true;
+          return false;
+        },
+      },
+    }).mount('#app');
+  </script>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <title>Vue.js 04 zad 01</title>
+  </head>
+  <body>
+    <div id="app">
+      <input type="checkbox" v-model="checked" /> Blokada zdarzeń
+
+      <form action="/aaa" method="POST" @reset="reset" @submit="submit">
+        <input />
+        <input type="reset" />
+        <input type="submit" />
+      </form>
+    </div>
+  </body>
+  <script>
+    const app = Vue.createApp({
+      data() {
+        return {
+          checked: false,
+        };
+      },
+      methods: {
+        reset(e) {
+          if (this.checked) e.preventDefault();
+        },
+        submit(e) {
+          if (this.checked) e.preventDefault();
+        },
+      },
+    }).mount('#app');
+  </script>
+</html>

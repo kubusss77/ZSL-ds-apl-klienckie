@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <title>Vue.js 04 zad 03</title>
+  </head>
+  <body>
+    <div id="app">
+      <h2>Akcesoria</h2>
+      <input type="checkbox" v-model="mysz" />Mysz <input type="checkbox" v-model="laptop" />Laptop
+      <input type="checkbox" v-model="pc" />Komputer stacjonarny
+
+      <h2>Forma odbioru</h2>
+      <input type="radio" v-model="dostawa" value="kurier" />Kurier
+      <input type="radio" v-model="dostawa" value="poczta" />Poczta
+      <input type="radio" v-model="dostawa" value="osobiscie" />Osobiście
+      <select v-model="dostawa">
+        <option value="kurier">Kurier</option>
+        <option value="poczta">Poczta</option>
+        <option value="osobiscie">Osobiście</option>
+      </select>
+      <p>Sposób dostawy: {{ this.dostawa }}</p>
+
+      <h2>Potwierdzenie</h2>
+      <input type="checkbox" v-model="potwierdzenie" /> Potwierdzam bla bla <br />
+      {{isReady}}
+      <br />
+
+      <input type="submit" :disabled="!isReady" />
+    </div>
+  </body>
+  <script>
+    const app = Vue.createApp({
+      data() {
+        return {
+          mysz: false,
+          laptop: false,
+          pc: false,
+          dostawa: '',
+          potwierdzenie: false,
+        };
+      },
+      computed: {
+        isReady() {
+          if ((this.mysz || this.laptop || this.pc) && this.potwierdzenie && this.dostawa) return true;
+          return false;
+        },
+      },
+    }).mount('#app');
+  </script>
+</html>

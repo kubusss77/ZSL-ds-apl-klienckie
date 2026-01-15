@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <title>Vue.js 04 zad 05</title>
+    <style>
+      #div {
+        width: 300px;
+        height: 300px;
+        border: 3px solid black;
+      }
+
+      .line {
+        display: flex;
+        margin: 10px;
+        padding: 10px;
+        background: cornflowerblue;
+      }
+
+      .word {
+        display: flex;
+        margin: 10px;
+        padding: 10px;
+        background: darkgrey;
+      }
+
+      .letter {
+        display: flex;
+        margin: 10px;
+        padding: 10px;
+        background: lightgrey;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <div @input="onInput" contenteditable id="div"></div>
+      <div>
+        <div v-for="line in split()" class="line">
+          <div v-for="word in line" class="word">
+            <div v-for="letter in word" class="letter">{{ letter }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script>
+    const app = Vue.createApp({
+      data() {
+        return {
+          text: '',
+        };
+      },
+      methods: {
+        onInput(e) {
+          this.text = e.target.innerText;
+        },
+
+        split() {
+          const split = this.text
+            .trim()
+            .split('\n')
+            .map((line) => line.split(' ').map((word) => word.split('')));
+          console.log(split);
+          return split;
+        },
+      },
+    }).mount('#app');
+  </script>
+</html>

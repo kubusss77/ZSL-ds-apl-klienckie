@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <title>Vue.js 04 zad 04</title>
+    <style>
+      .word {
+        display: flex;
+        padding: 10px;
+        background: gray;
+        margin: 10px;
+      }
+
+      .letter {
+        padding: 5px;
+        background: lightgray;
+        margin: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <input v-model="text" />
+      <div style="display: flex">
+        <div v-for="word in transform()" class="word">
+          <div v-for="letter in word" class="letter">{{letter}}</div>
+        </div>
+      </div>
+
+      <button @click="alert()">Wyślij</button>
+    </div>
+  </body>
+  <script>
+    const app = Vue.createApp({
+      data() {
+        return {
+          text: 'abs dsasd dsds',
+        };
+      },
+      methods: {
+        transform() {
+          return this.text.split(' ').map((word) => word.split(''));
+        },
+        alert() {
+          alert(this.text);
+        },
+      },
+    }).mount('#app');
+  </script>
+</html>
