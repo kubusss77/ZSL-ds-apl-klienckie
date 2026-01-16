@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <title>Vue.js 05 zad 10</title>
+  </head>
+  <body>
+    <template id="child">
+      <h2>child-component</h2>
+      <h3>{{nameProp}}</h3>
+      <p>{{a}}</p>
+      <input type="range" min="0" max="100" v-model="a" />
+      <button @click="changeValue(10)">+10</button>
+      <button @click="changeValue(-10)">-10</button>
+      <button @click="changeValue(1)">+1</button>
+      <button @click="changeValue(-1)">-1</button>
+      <button @click="send()">Send</button>
+    </template>
+    <div id="app">
+      <child-component
+        v-for="comp in array"
+        :id-prop="comp.id"
+        :name-prop="comp.name"
+        :value-prop="comp.val"
+        :send-prop="receive"
+      ></child-component>
+      <div>{{JSON.stringify(this.received, null, 3)}}</div>
+    </div>
+  </body>
+  <script>
+    const ChildComponent = {
+      template: '#child',
+      data() {
+        return {
+          a: this.valueProp,
+        };
+      },
+      props: ['idProp', 'nameProp', 'valueProp', 'sendProp'],
+      methods: {
+        changeValue(val) {
+          const parsed = parseInt(this.a);
+          if (parsed + val > 100) {
+            this.a = 100;
+            alert('nie można przekroczyć 100');
+            return;
+          }
+
+          if (parsed + val < 0) {
+            this.a = 0;
+            alert('nie można przekroczyć 0');
+            return;
+          }
+
+          this.a = parsed + val;
+        },
+
+        send() {
+          this.sendProp({
+            id: this.idProp,
+            name: this.nameProp,
+            value: this.a,
+          });
+        },
+      },
+    };
+
+    const app = Vue.createApp({
+      data() {
+        return {
+          array: [
+            { id: 1, name: 'speed', val: 40 },
+            { id: 2, name: 'fuel', val: 70 },
+            { id: 3, name: 'CO2', val: 20 },
+          ],
+          received: [],
+        };
+      },
+      methods: {
+        receive(data) {
+          this.received.push(data);
+        },
+      },
+      components: {
+        'child-component': ChildComponent,
+      },
+    }).mount('#app');
+  </script>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <title>Vue.js 05 zad 05</title>
+  </head>
+  <body>
+    <template id="template">
+      <h1>{{this.headerProp}}</h1>
+      <p>Imię: {{this.firstnameProp}}</p>
+      <p>Wiek: {{this.ageProp}}</p>
+      <pre>{{JSON.stringify(this.$props, null, 3)}}</pre>
+    </template>
+    <div id="app">
+      <button @click="onClick">Zmień</button>
+      <component-a :header-prop="header" :firstname-prop="firstName" :age-prop="age"></component-a>
+      <component-a :header-prop="header" :firstname-prop="firstName" :age-prop="age"></component-a>
+      <component-a :header-prop="header" :firstname-prop="firstName" :age-prop="age"></component-a>
+    </div>
+  </body>
+  <script>
+    const ComponentA = {
+      template: '#template',
+      props: ['headerProp', 'firstnameProp', 'ageProp'],
+    };
+    const app = Vue.createApp({
+      data() {
+        return {
+          header: 'default header',
+          firstName: 'default name',
+          age: 'defaut age',
+        };
+      },
+      methods: {
+        onClick() {
+          this.header = 'Wizytówka';
+          this.firstName = 'Jan Nowak';
+          this.age = '23';
+        },
+      },
+      components: {
+        'component-a': ComponentA,
+      },
+    }).mount('#app');
+  </script>
+</html>

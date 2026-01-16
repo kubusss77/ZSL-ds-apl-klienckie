@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <title>Vue.js 05 zad 02</title>
+  </head>
+  <body>
+    <template id="wizytowka-templ">
+      <h1>Moja wizytówka</h1>
+      <p>Imię: {{name}}</p>
+      <p>Nazwisko: {{surname}}</p>
+      <p>Wiek: {{age}}</p>
+      <p>Zawód: {{profesion}}</p>
+    </template>
+    <div id="app">
+      <wizytowka-comp></wizytowka-comp>
+      <wizytowka-comp></wizytowka-comp>
+      <wizytowka-comp></wizytowka-comp>
+    </div>
+  </body>
+  <script>
+    const WizytowkaComp = {
+      template: '#wizytowka-templ',
+
+      data() {
+        return {
+          name: 'Jan',
+          surname: 'Nowak',
+          age: '30',
+          profesion: 'Informatyk',
+        };
+      },
+
+      methods: {},
+    };
+
+    const app = Vue.createApp({
+      data() {
+        return {};
+      },
+      components: {
+        'wizytowka-comp': WizytowkaComp,
+      },
+    }).mount('#app');
+  </script>
+</html>

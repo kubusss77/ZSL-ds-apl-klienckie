@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <title>Vue.js 05 zad 07</title>
+  </head>
+  <body>
+    <template id="preview-template">
+      <h2>Preview comp</h2>
+      <pre>{{JSON.stringify(this.$props, null, 3)}}</pre>
+    </template>
+    <template id="display-template">
+      <h2>Display comp</h2>
+      <p>{{this.firstnameProp}}</p>
+      <p>{{this.surnameProp}}</p>
+      <p>{{this.ageProp}}</p>
+      <img :alt="this.imageProp" />
+    </template>
+    <div id="app">
+      <input v-model="name" />
+      <input v-model="surname" />
+      <select v-model="age">
+        <option>31</option>
+        <option>30</option>
+        <option>29</option>
+      </select>
+      <select v-model="image">
+        <option>a</option>
+        <option>b</option>
+        <option>c</option>
+      </select>
+      <button @click="addComp">Add child</button>
+      <preview-comp :firstname-prop="name" :surname-prop="surname" :age-prop="age" :image-prop="image"></preview-comp>
+      <display-comp
+        v-for="comp in display"
+        :firstname-prop="comp.name"
+        :surname-prop="comp.surname"
+        :age-prop="comp.age"
+        :image-prop="comp.image"
+      ></display-comp>
+    </div>
+  </body>
+  <script>
+    const PreviewComp = {
+      template: '#preview-template',
+      props: ['firstnameProp', 'surnameProp', 'ageProp', 'imageProp'],
+    };
+
+    const DisplayComp = {
+      template: '#display-template',
+      props: ['firstnameProp', 'surnameProp', 'ageProp', 'imageProp'],
+    };
+
+    const app = Vue.createApp({
+      data() {
+        return {
+          display: [],
+          name: '',
+          surname: '',
+          age: '',
+          image: '',
+        };
+      },
+      components: {
+        'preview-comp': PreviewComp,
+        'display-comp': DisplayComp,
+      },
+      methods: {
+        addComp() {
+          this.display.push({
+            name: this.name,
+            surname: this.surname,
+            age: this.age,
+            image: this.image,
+          });
+        },
+      },
+    }).mount('#app');
+  </script>
+</html>

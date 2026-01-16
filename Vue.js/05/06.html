@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <title>Vue.js 05 zad 06</title>
+  </head>
+  <body>
+    <template id="test-template">
+      <h1>from parent: {{propX}}</h1>
+      <button @click="add">dodaj 1</button>
+      <h1>{{x}}</h1>
+    </template>
+    <div id="app">
+      <test-component v-for="digit in digitsArray" v-bind:prop-x="digit" />
+    </div>
+  </body>
+  <script>
+    const TestComponent = {
+      data() {
+        return { x: this.propX };
+      },
+      template: '#test-template',
+      props: ['propX'],
+      methods: {
+        add() {
+          this.x++;
+        },
+      },
+    };
+    const app = Vue.createApp({
+      data() {
+        return {
+          digitsArray: [4, 16, 256],
+        };
+      },
+      methods: {},
+      components: {
+        'test-component': TestComponent,
+      },
+    }).mount('#app');
+  </script>
+</html>

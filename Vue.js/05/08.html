@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <title>Vue.js 05 zad 08</title>
+  </head>
+  <body>
+    <template id="child-template">
+      <div>
+        <h2>child-component</h2>
+        <button @click="addItem(111)">add 111</button>
+        <button @click="addItem(222)">add 222</button>
+        <button @click="addItem(333)">add 333</button>
+      </div>
+    </template>
+    <div id="app">
+      <p>Sum in parent: {{parentValue}}</p>
+      <child-comp :func-prop="updateDataInParent"></child-comp>
+    </div>
+  </body>
+  <script>
+    const ChildComponent = {
+      template: '#child-template',
+      props: ['funcProp'],
+      methods: {
+        addItem(val) {
+          this.funcProp(val);
+        },
+      },
+    };
+    const app = Vue.createApp({
+      data() {
+        return {
+          parentValue: 0,
+        };
+      },
+      methods: {
+        updateDataInParent(val) {
+          console.log(val);
+          this.parentValue += val;
+        },
+      },
+      components: {
+        'child-comp': ChildComponent,
+      },
+    }).mount('#app');
+  </script>
+</html>

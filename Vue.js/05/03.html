@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <title>Vue.js 05 zad 03</title>
+  </head>
+  <body>
+    <template id="template">
+      <div>
+        <p>Imię: {{ dataA }}</p>
+        <p>Nazwisko: {{ dataB }}</p>
+      </div>
+      <pre>{{JSON.stringify(this.$props, null,5)}}</pre>
+    </template>
+    <div id="app">
+      <component-a prop-a="Jan" prop-b="Nowak"></component-a>
+    </div>
+  </body>
+  <script>
+    const ComponentA = {
+      template: '#template',
+
+      props: ['propA', 'propB'],
+
+      data() {
+        return {
+          dataA: this.propA,
+          dataB: this.propB,
+        };
+      },
+    };
+
+    const app = Vue.createApp({
+      data() {
+        return {};
+      },
+      components: {
+        'component-a': ComponentA,
+      },
+    }).mount('#app');
+  </script>
+</html>

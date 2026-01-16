@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <title>Vue.js 05 zad 04</title>
+  </head>
+  <body>
+    <template id="test-template">
+      <h2>{{this.propX}}</h2>
+    </template>
+    <div id="app">
+      <button @click="modify">dodaj 1</button>
+      <test-component v-bind:prop-x="x"></test-component>
+      <test-component v-bind:prop-x="x"></test-component>
+      <test-component v-bind:prop-x="x"></test-component>
+    </div>
+  </body>
+  <script>
+    const TestComponent = {
+      props: ['propX'],
+      template: '#test-template',
+    };
+    const app = Vue.createApp({
+      data() {
+        return {
+          x: 2,
+        };
+      },
+      methods: {
+        modify() {
+          this.x = Math.pow(this.x, 2);
+        },
+      },
+      components: {
+        'test-component': TestComponent,
+      },
+    }).mount('#app');
+  </script>
+</html>

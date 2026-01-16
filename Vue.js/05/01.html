@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <title>Vue.js 05 zad 01</title>
+  </head>
+  <body>
+    <div id="app">
+      <items-component></items-component>
+      <items-component></items-component>
+      <items-component></items-component>
+
+      <change-title-component></change-title-component>
+
+      <add-item-component></add-item-component>
+    </div>
+  </body>
+  <script>
+    const ItemsComponent = {
+      template: '<div style="border: 5px solid black; padding: 10px">ItemsComponent</div>',
+    };
+
+    const ChangeTitleComponent = {
+      template: '<div style="border: 5px solid gray; padding: 10px">ChangeTitleComponent</div>',
+    };
+
+    const AddItemComponent = {
+      template: '<div style="border: 5px solid lightgreen; padding: 10px">AddItemComponent</div>',
+    };
+
+    const app = Vue.createApp({
+      data() {
+        return {};
+      },
+      components: {
+        'items-component': ItemsComponent,
+        'change-title-component': ChangeTitleComponent,
+        'add-item-component': AddItemComponent,
+      },
+    }).mount('#app');
+  </script>
+</html>
