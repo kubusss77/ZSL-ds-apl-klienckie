@@ -21,8 +21,7 @@ const get = (url) =>
   });
 
 const getPromotions = () => get('/promotions');
+const getPromotion = (id) => get(`/promotion/${id}`);
+const getProduct = (id) => get(`/product/${id}`);
 
-export {
-  getPromotions,
-  //tu będą pozostałe metody
-};
+export { getPromotions, getPromotion, getProduct };

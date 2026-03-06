@@ -6,10 +6,18 @@
   <Footer></Footer>
 </template>
 
-<script setup>
+<script>
 import { RouterView } from 'vue-router';
 import Header from './components/Header.vue';
 import Footer from './components/Footer.vue';
+
+export default {
+  computed: {
+    promotionObject() {
+      return this.$store.getters.GET_PROMOTION_OBJECT;
+    },
+  },
+};
 </script>
 
 <style>

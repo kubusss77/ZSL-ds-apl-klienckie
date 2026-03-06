@@ -1,7 +1,6 @@
 import { getPromotions } from '@/api';
 
 const promotions = {
-  //state
   state() {
     return {
       promotionsList: [],
@@ -14,6 +13,12 @@ const promotions = {
   mutations: {
     SET_PROMOTIONS_LIST(state, newPromotions) {
       state.promotionsList = newPromotions;
+    },
+    SET_PROMOTIONS_LOADING(state, value) {
+      state.promotionsLoading = value;
+    },
+    SET_PROMOTIONS_ERROR(state, error) {
+      state.promotionsError = error;
     },
   },
 
@@ -41,7 +46,7 @@ const promotions = {
           commit('SET_PROMOTIONS_LIST', data.promotions);
         })
         .catch((error) => {
-          commit('SET_PROMOTIONS_ERROR', 'server error!!!');
+          commit('SET_PROMOTIONS_ERROR', 'Error fetching promotions: ' + error.message);
         })
         .finally(() => {
           commit('SET_PROMOTIONS_LOADING', false);
