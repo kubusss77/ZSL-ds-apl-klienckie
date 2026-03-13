@@ -7,7 +7,7 @@ const data = require('./data.json');
 app.use(cors());
 
 app.get('/promotions', function (req, res) {
-  res.json(data);
+  res.json(data.promotions);
 });
 
 app.get('/promotion/:id', function (req, res) {

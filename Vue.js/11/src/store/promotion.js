@@ -25,6 +25,9 @@ const promotion = {
     GET_PROMOTION_OBJECT(state) {
       return state.promotionObject;
     },
+    GET_PROMOTION_LOADING(state) {
+      return state.promotionLoading;
+    },
   },
 
   actions: {
@@ -32,9 +35,30 @@ const promotion = {
       commit('SET_PROMOTION_LOADING', true);
 
       getPromotion(promotionId)
-        .then((data) => {
-          console.log('promocja id: ', data);
-          commit('SET_PROMOTION_OBJECT', data.promotion);
+        .then(async (data) => {
+          try {
+            const fullProducts = [];
+
+            // Iteracja - czekamy na każdy produkt po kolei
+
+            for (const productId of data.items) {
+              const product = await getProduct(productId);
+              fullProducts.push(product);
+            }
+
+            // Łączymy dane promocji (header, color itp.) z pełnymi obiektami produktów
+
+            const returnObject = {
+              ...data,
+              items: fullProducts,
+            };
+
+            commit('SET_PROMOTION_OBJECT', returnObject);
+          } catch (error) {
+            commit('SET_PROMOTION_ERROR', 'Nie udało się pobrać produktów.');
+          } finally {
+            commit('SET_PROMOTION_LOADING', false);
+          }
         })
         .catch((error) => {
           commit('SET_PROMOTION_ERROR', `Error fetching promotion with id ${promotionId}: ${error.message}`);

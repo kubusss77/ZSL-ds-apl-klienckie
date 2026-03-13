@@ -1,7 +1,7 @@
 <template>
   <div :style="contStyle">
-    <h3>{{ this.promotion.header }}</h3>
-    <h2>{{ this.promotion.description }}</h2>
+    <h2>{{ this.promotion.header }}</h2>
+    <p>{{ this.promotion.description }}</p>
   </div>
 </template>
 
@@ -28,4 +28,17 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+h2 {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+p {
+  text-align: center;
+}
+
+div {
+  padding: 2rem;
+}
+</style>

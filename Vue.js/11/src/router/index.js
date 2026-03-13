@@ -5,6 +5,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 
 import HomeView from '@/views/HomeView.vue';
 import AboutView from '@/views/AboutView.vue';
+import PromotionView from '@/views/PromotionView.vue';
 
 //lazy load - renderuje się tylko gdy jest potrzebny a nie z góry
 

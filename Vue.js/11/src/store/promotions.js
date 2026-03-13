@@ -43,7 +43,7 @@ const promotions = {
 
       getPromotions()
         .then((data) => {
-          commit('SET_PROMOTIONS_LIST', data.promotions);
+          commit('SET_PROMOTIONS_LIST', data);
         })
         .catch((error) => {
           commit('SET_PROMOTIONS_ERROR', 'Error fetching promotions: ' + error.message);

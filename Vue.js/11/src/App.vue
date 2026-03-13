@@ -2,6 +2,7 @@
   <Header></Header>
   <main>
     <RouterView />
+    <AppLoader v-show="promotionLoading" />
   </main>
   <Footer></Footer>
 </template>
@@ -10,12 +11,20 @@
 import { RouterView } from 'vue-router';
 import Header from './components/Header.vue';
 import Footer from './components/Footer.vue';
+import AppLoader from './components/AppLoader.vue';
 
 export default {
   computed: {
-    promotionObject() {
-      return this.$store.getters.GET_PROMOTION_OBJECT;
+    promotionLoading() {
+      const loading = this.$store.getters.GET_PROMOTION_LOADING;
+      console.log('loading', loading);
+      return loading;
     },
+  },
+  components: {
+    Header,
+    Footer,
+    AppLoader,
   },
 };
 </script>
