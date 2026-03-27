@@ -18,7 +18,7 @@ export default {
     promotionLoading() {
       const loading = this.$store.getters.GET_PROMOTION_LOADING;
       console.log('loading', loading);
-      return loading;
+      return true;
     },
   },
   components: {

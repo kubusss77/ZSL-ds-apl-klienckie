@@ -15,7 +15,7 @@ export default {
       let imageUrl;
 
       try {
-        imageUrl = `/src/assets/${image}`;
+        imageUrl = `/src/assets/star.svg`;
       } catch (e) {
         console.log(e);
       }

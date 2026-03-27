@@ -19,6 +19,6 @@ export default {
 
 <style scoped>
 .star {
-  background: url(/src/assets/star.svg);
+  background: url('/src/assets/star.svg');
 }
 </style>
