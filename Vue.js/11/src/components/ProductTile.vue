@@ -1,6 +1,6 @@
 <template>
   <RouterLink :to="`/product/${product.id}`" class="product">
-    <img />
+    <img :src="'/src/assets/' + product.image" />
     <div>{{ product.name }}</div>
     <div>{{ product.price }}</div>
     <div class="stars-background">

@@ -27,6 +27,9 @@ const promotions = {
     GET_PROMOTIONS_LIST(state) {
       return state.promotionsList;
     },
+    GET_PROMOTIONS_LOADING(state) {
+      return state.promotionsLoading;
+    },
   },
 
   // tu zapytania do serwera z pomocą naszego api

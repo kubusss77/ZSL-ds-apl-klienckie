@@ -4,7 +4,7 @@ const promotion = {
   state() {
     return {
       promotionObject: {},
-      promotionLoading: false,
+      promotionLoading: true,
       promotionError: null,
     };
   },
@@ -33,6 +33,8 @@ const promotion = {
   actions: {
     FETCH_PROMOTION({ state, commit, getters }, promotionId) {
       commit('SET_PROMOTION_LOADING', true);
+
+      console.log('fetch promotion');
 
       getPromotion(promotionId)
         .then(async (data) => {

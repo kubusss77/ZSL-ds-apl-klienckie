@@ -1,8 +1,12 @@
 <template>
   <Header></Header>
   <main>
-    <RouterView />
-    <AppLoader v-show="promotionLoading" />
+    <div id="main-content">
+      <RouterView />
+    </div>
+    <div id="loader">
+      <AppLoader v-show="promotionsLoading" />
+    </div>
   </main>
   <Footer></Footer>
 </template>
@@ -15,10 +19,10 @@ import AppLoader from './components/AppLoader.vue';
 
 export default {
   computed: {
-    promotionLoading() {
-      const loading = this.$store.getters.GET_PROMOTION_LOADING;
-      console.log('loading', loading);
-      return true;
+    promotionsLoading() {
+      const loading = this.$store.getters.GET_PROMOTIONS_LOADING;
+      console.log('loading sss', loading);
+      return loading;
     },
   },
   components: {
@@ -38,5 +42,12 @@ export default {
 
 main {
   flex: 1;
+}
+
+#loader {
+  position: absolute;
+  top: 45%;
+  left: 45%;
+  width: 10%;
 }
 </style>

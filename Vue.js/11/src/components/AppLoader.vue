@@ -1,42 +1,12 @@
 <template>
-  <div :style="contStyle"></div>
+  <div class="loader"></div>
 </template>
 
-<script>
-export default {
-  computed: {
-    style() {
-      let imageUrl;
-
-      try {
-        imageUrl = ``;
-      } catch (e) {
-        console.log(e);
-      }
-
-      return {
-        background: `url(${imageUrl})`,
-      };
-    },
-  },
-};
-</script>
-
 <style scoped>
-h2 {
-  text-align: center;
-  margin-bottom: 1rem;
-}
-
-p {
-  text-align: center;
-}
-
-div {
+.loader {
+  justify-content: center;
   padding: 2rem;
-}
-
-#dd {
-  background-image: url('/src/assets/tube-spinner.sv');
+  background-image: url('/src/assets/tube-spinner.svg');
+  background-repeat: no-repeat;
 }
 </style>

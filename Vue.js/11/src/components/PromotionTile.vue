@@ -14,8 +14,10 @@ export default {
       const { image } = this.promotion;
       let imageUrl;
 
+      console.log('image', image);
+
       try {
-        imageUrl = `/src/assets/star.svg`;
+        imageUrl = `/src/assets/${image}`;
       } catch (e) {
         console.log(e);
       }

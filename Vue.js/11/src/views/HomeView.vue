@@ -1,8 +1,9 @@
 <template>
   <a v-for="promotion in promotionsList" :href="'/promotion/' + promotion.id"
-    ><PromotionTile :promotion="promotion" class="prom"></PromotionTile
+    ><PromotionTile :promotion="promotion" class="promotion"></PromotionTile
   ></a>
 </template>
+
 <script>
 import PromotionTile from '@/components/PromotionTile.vue';
 
@@ -14,7 +15,6 @@ export default {
   computed: {
     promotionsList() {
       const ret = this.$store.getters.GET_PROMOTIONS_LIST;
-      console.log(ret);
       return ret;
     },
   },
@@ -25,7 +25,7 @@ export default {
 </script>
 
 <style>
-.prom {
+.promotion {
   margin: 1rem;
 }
 a {
