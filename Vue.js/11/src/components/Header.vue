@@ -4,6 +4,7 @@
       <ul>
         <li><RouterLink to="/" exact>Home</RouterLink></li>
         <li><RouterLink to="/about">About</RouterLink></li>
+        <li><RouterLink to="/register">Register</RouterLink></li>
         <li><RouterLink to="/nnn">Not found</RouterLink></li>
       </ul>
     </nav>

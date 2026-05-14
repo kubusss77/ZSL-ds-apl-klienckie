@@ -24,4 +24,21 @@ const getPromotions = () => get('/promotions');
 const getPromotion = (id) => get(`/promotion/${id}`);
 const getProduct = (id) => get(`/product/${id}`);
 
-export { getPromotions, getPromotion, getProduct };
+const post = (url, userObject) =>
+  new Promise((resolve, reject) => {
+    setTimeout(() => {
+      axios
+        .post(API_URL + url, userObject, { withCredentials: true })
+        .then((response) => {
+          console.log('data', response.data);
+          resolve(response.data);
+        })
+        .catch((error) => {
+          reject(error);
+        });
+    }, 1000);
+  });
+
+const registerUser = (userObject) => post('/createUser', userObject);
+
+export { getPromotions, getPromotion, getProduct, registerUser };
