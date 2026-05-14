@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const PORT = 3000;
 const cors = require('cors');
+const cookieParser = require('cookie-parser');
 const path = require('path');
 const fs = require('fs').promises;
 let data = require('./data.json');
@@ -15,6 +16,7 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 app.use(express.json());
+app.use(cookieParser());
 
 const readUsersData = async () => {
   try {
@@ -84,6 +86,61 @@ app.post('/createUser', async (req, res) => {
     return res.json({ status: 'registered' });
   } catch (error) {
     return res.status(500).json({ status: 'error', message: 'Server error' });
+  }
+});
+
+app.post('/loginUser', async (req, res) => {
+  const { email, password } = req.body || {};
+
+  if (!email || !password) {
+    return res.json({ status: 'notlogged' });
+  }
+
+  try {
+    const usersData = await readUsersData();
+    const normalizedEmail = String(email).trim().toLowerCase();
+
+    const foundUser = usersData.users.find(
+      (user) => user.email === normalizedEmail && user.password === String(password)
+    );
+
+    if (!foundUser) {
+      return res.json({ status: 'notlogged' });
+    }
+
+    res.cookie('email', normalizedEmail, {
+      httpOnly: true,
+      sameSite: 'lax',
+    });
+
+    return res.json({ status: 'authorized', email: normalizedEmail });
+  } catch (error) {
+    return res.status(500).json({ status: 'error' });
+  }
+});
+
+app.post('/logoutUser', (req, res) => {
+  res.clearCookie('email');
+  res.json({ status: 'logout' });
+});
+
+app.get('/getCurrentUser', async (req, res) => {
+  const email = req.cookies.email;
+  if (!email) {
+    return res.json({ status: 'notauthorized' });
+  }
+
+  try {
+    const usersData = await readUsersData();
+    const foundUser = usersData.users.find((user) => user.email === email);
+
+    if (foundUser) {
+      return res.json({ status: 'authorized', email });
+    }
+
+    return res.json({ status: 'notauthorized' });
+  } catch (error) {
+    return res.status(500).json({ status: 'error' });
   }
 });
 

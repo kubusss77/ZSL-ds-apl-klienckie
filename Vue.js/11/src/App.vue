@@ -19,6 +19,9 @@ import AppLoader from './components/AppLoader.vue';
 import './styles/main.css';
 
 export default {
+  beforeCreate() {
+    this.$store.dispatch('FETCH_CURRENT_USER');
+  },
   computed: {
     promotionsLoading() {
       return this.$store.getters.GET_PROMOTIONS_LOADING;

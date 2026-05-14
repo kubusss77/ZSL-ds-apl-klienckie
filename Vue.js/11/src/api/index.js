@@ -2,12 +2,12 @@ import axios from 'axios';
 
 const API_URL = 'http://localhost:3000';
 
-const get = (url) =>
+const get = (url, withCredentials = false) =>
   new Promise((resolve, reject) => {
     setTimeout(
       () => {
         axios
-          .get(API_URL + url)
+          .get(API_URL + url, { withCredentials })
           .then((response) => {
             console.log('data', response.data);
             resolve(response.data);
@@ -24,7 +24,7 @@ const getPromotions = () => get('/promotions');
 const getPromotion = (id) => get(`/promotion/${id}`);
 const getProduct = (id) => get(`/product/${id}`);
 
-const post = (url, userObject) =>
+const post = (url, userObject = {}) =>
   new Promise((resolve, reject) => {
     setTimeout(() => {
       axios
@@ -40,5 +40,8 @@ const post = (url, userObject) =>
   });
 
 const registerUser = (userObject) => post('/createUser', userObject);
+const loginUser = (userObject) => post('/loginUser', userObject);
+const logoutUser = () => post('/logoutUser');
+const getCurrentUser = () => get('/getCurrentUser', true);
 
-export { getPromotions, getPromotion, getProduct, registerUser };
+export { getPromotions, getPromotion, getProduct, registerUser, loginUser, logoutUser, getCurrentUser };

@@ -7,6 +7,12 @@
 
       <input v-model.trim="email" type="email" placeholder="Email" autocomplete="email" />
       <input v-model="password" type="password" placeholder="Password" autocomplete="new-password" />
+      <input
+        v-model="repeatPassword"
+        type="password"
+        placeholder="Repeat password"
+        autocomplete="new-password"
+      />
 
       <button type="submit" :disabled="disabled || loading">register</button>
     </form>
@@ -38,6 +44,7 @@ export default {
       error: '',
       email: '',
       password: '',
+      repeatPassword: '',
       exists: false,
       registered: false,
       loading: false,
@@ -46,7 +53,12 @@ export default {
   computed: {
     disabled() {
       const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      return !emailPattern.test(this.email) || this.email.length < 4 || this.password.length < 3;
+      return (
+        !emailPattern.test(this.email) ||
+        this.email.length < 4 ||
+        this.password.length < 3 ||
+        this.password !== this.repeatPassword
+      );
     },
   },
   methods: {
@@ -57,6 +69,11 @@ export default {
 
       if (this.password.length < 3) {
         this.error = 'Haslo musi miec minimum 3 znaki';
+        return;
+      }
+
+      if (this.password !== this.repeatPassword) {
+        this.error = 'Hasla sie nie zgadzaja';
         return;
       }
 
@@ -71,6 +88,8 @@ export default {
 
           if (data.status === 'registered') {
             this.registered = true;
+            this.password = '';
+            this.repeatPassword = '';
             return;
           }
 
