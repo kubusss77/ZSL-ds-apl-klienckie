@@ -3,6 +3,7 @@
     <nav>
       <ul>
         <li><RouterLink to="/" exact>Home</RouterLink></li>
+        <li><RouterLink to="/search">Search</RouterLink></li>
         <li><RouterLink to="/about">About</RouterLink></li>
         <li><RouterLink to="/nnn">Not found</RouterLink></li>
         <li class="spacer"></li>

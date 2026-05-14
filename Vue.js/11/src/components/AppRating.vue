@@ -1,15 +1,25 @@
 <template>
   <div class="rating">
     <img v-for="index in starsCount" :key="index" class="star" src="/src/assets/star.svg" alt="star" />
+    <span class="count">({{ ratesNumber }})</span>
   </div>
 </template>
 
 <script>
 export default {
-  props: ['count'],
+  props: {
+    rate: {
+      type: Number,
+      default: 0,
+    },
+    ratesNumber: {
+      type: Number,
+      default: 0,
+    },
+  },
   computed: {
     starsCount() {
-      const value = Number(this.count);
+      const value = Number(this.rate);
       if (Number.isNaN(value) || value <= 0) {
         return 0;
       }
@@ -28,5 +38,10 @@ export default {
 
 .star {
   width: 1rem;
+}
+
+.count {
+  color: #4b5563;
+  font-size: 0.9rem;
 }
 </style>

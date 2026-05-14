@@ -23,6 +23,7 @@ const get = (url, withCredentials = false) =>
 const getPromotions = () => get('/promotions');
 const getPromotion = (id) => get(`/promotion/${id}`);
 const getProduct = (id) => get(`/product/${id}`);
+const getProducts = () => get('/products');
 
 const post = (url, userObject = {}) =>
   new Promise((resolve, reject) => {
@@ -44,4 +45,13 @@ const loginUser = (userObject) => post('/loginUser', userObject);
 const logoutUser = () => post('/logoutUser');
 const getCurrentUser = () => get('/getCurrentUser', true);
 
-export { getPromotions, getPromotion, getProduct, registerUser, loginUser, logoutUser, getCurrentUser };
+export {
+  getPromotions,
+  getPromotion,
+  getProduct,
+  getProducts,
+  registerUser,
+  loginUser,
+  logoutUser,
+  getCurrentUser,
+};

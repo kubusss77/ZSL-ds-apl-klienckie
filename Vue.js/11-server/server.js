@@ -60,6 +60,10 @@ app.get('/product/:id', function (req, res) {
   res.json(product);
 });
 
+app.get('/products', function (req, res) {
+  res.json(data.products);
+});
+
 app.post('/createUser', async (req, res) => {
   const { email, password } = req.body || {};
 
