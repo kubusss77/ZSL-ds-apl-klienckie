@@ -4,7 +4,7 @@ const promotion = {
   state() {
     return {
       promotionObject: {},
-      promotionLoading: true,
+      promotionLoading: false,
       promotionError: null,
     };
   },
@@ -28,46 +28,35 @@ const promotion = {
     GET_PROMOTION_LOADING(state) {
       return state.promotionLoading;
     },
+    GET_PROMOTION_ERROR(state) {
+      return state.promotionError;
+    },
   },
 
   actions: {
-    FETCH_PROMOTION({ state, commit, getters }, promotionId) {
+    async FETCH_PROMOTION({ commit }, promotionId) {
       commit('SET_PROMOTION_LOADING', true);
+      commit('SET_PROMOTION_ERROR', null);
+      commit('SET_PROMOTION_OBJECT', {});
 
-      console.log('fetch promotion');
+      try {
+        const data = await getPromotion(promotionId);
+        const fullProducts = [];
 
-      getPromotion(promotionId)
-        .then(async (data) => {
-          try {
-            const fullProducts = [];
+        for (const productId of data.items) {
+          const product = await getProduct(productId);
+          fullProducts.push(product);
+        }
 
-            // Iteracja - czekamy na każdy produkt po kolei
-
-            for (const productId of data.items) {
-              const product = await getProduct(productId);
-              fullProducts.push(product);
-            }
-
-            // Łączymy dane promocji (header, color itp.) z pełnymi obiektami produktów
-
-            const returnObject = {
-              ...data,
-              items: fullProducts,
-            };
-
-            commit('SET_PROMOTION_OBJECT', returnObject);
-          } catch (error) {
-            commit('SET_PROMOTION_ERROR', 'Nie udało się pobrać produktów.');
-          } finally {
-            commit('SET_PROMOTION_LOADING', false);
-          }
-        })
-        .catch((error) => {
-          commit('SET_PROMOTION_ERROR', `Error fetching promotion with id ${promotionId}: ${error.message}`);
-        })
-        .finally(() => {
-          commit('SET_PROMOTION_LOADING', false);
+        commit('SET_PROMOTION_OBJECT', {
+          ...data,
+          items: fullProducts,
         });
+      } catch (error) {
+        commit('SET_PROMOTION_ERROR', `Error fetching promotion with id ${promotionId}: ${error.message}`);
+      } finally {
+        commit('SET_PROMOTION_LOADING', false);
+      }
     },
   },
 };

@@ -4,9 +4,11 @@
 
 <style scoped>
 .loader {
-  justify-content: center;
-  padding: 2rem;
+  width: 56px;
+  height: 56px;
   background-image: url('/src/assets/tube-spinner.svg');
   background-repeat: no-repeat;
+  background-size: contain;
+  margin: 0 auto;
 }
 </style>

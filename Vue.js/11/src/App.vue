@@ -16,13 +16,12 @@ import { RouterView } from 'vue-router';
 import Header from './components/Header.vue';
 import Footer from './components/Footer.vue';
 import AppLoader from './components/AppLoader.vue';
+import './styles/main.css';
 
 export default {
   computed: {
     promotionsLoading() {
-      const loading = this.$store.getters.GET_PROMOTIONS_LOADING;
-      console.log('loading sss', loading);
-      return loading;
+      return this.$store.getters.GET_PROMOTIONS_LOADING;
     },
   },
   components: {
@@ -34,12 +33,6 @@ export default {
 </script>
 
 <style>
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
 main {
   flex: 1;
 }

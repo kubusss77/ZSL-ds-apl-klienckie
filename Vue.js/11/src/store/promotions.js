@@ -30,30 +30,25 @@ const promotions = {
     GET_PROMOTIONS_LOADING(state) {
       return state.promotionsLoading;
     },
+    GET_PROMOTIONS_ERROR(state) {
+      return state.promotionsError;
+    },
   },
 
   // tu zapytania do serwera z pomocą naszego api
   actions: {
-    FETCH_PROMOTIONS({ state, commit }) {
-      // najpierw ustawiamy stan ładowania na true (czyli dane się ładują, teraz mógłby się pokazywać loader)
-
+    async FETCH_PROMOTIONS({ commit }) {
       commit('SET_PROMOTIONS_LOADING', true);
+      commit('SET_PROMOTIONS_ERROR', null);
 
-      // potem wywołujemy funkcję z api, która
-      // odbiera dane z serwera (poprzez axios) i ustawia listę promocji w store
-      // w razie błędu ustawia error w store (catch)
-      // niezależnie od błędu lub jego braku (finally), kończy loading
-
-      getPromotions()
-        .then((data) => {
-          commit('SET_PROMOTIONS_LIST', data);
-        })
-        .catch((error) => {
-          commit('SET_PROMOTIONS_ERROR', 'Error fetching promotions: ' + error.message);
-        })
-        .finally(() => {
-          commit('SET_PROMOTIONS_LOADING', false);
-        });
+      try {
+        const data = await getPromotions();
+        commit('SET_PROMOTIONS_LIST', data);
+      } catch (error) {
+        commit('SET_PROMOTIONS_ERROR', `Error fetching promotions: ${error.message}`);
+      } finally {
+        commit('SET_PROMOTIONS_LOADING', false);
+      }
     },
   },
 };

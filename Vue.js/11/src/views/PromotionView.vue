@@ -7,10 +7,11 @@
     <div class="products-cont">
       <p>{{ promotionObject.longDescription }}</p>
       <div class="products-grid">
-        <ProductTile v-for="product in promotionObject.items" :key="product" :product="product" />
+        <ProductTile v-for="product in promotionObject.items || []" :key="product.id" :product="product" />
       </div>
     </div>
   </div>
+  <p v-if="promotionError" class="error">{{ promotionError }}</p>
   <div id="loader">
     <AppLoader v-show="promotionLoading" />
   </div>
@@ -27,19 +28,25 @@ export default {
 
   computed: {
     promotionObject() {
-      const object = this.$store.getters.GET_PROMOTION_OBJECT;
-      console.log('object', object.items);
-      return object;
+      return this.$store.getters.GET_PROMOTION_OBJECT;
     },
 
     promotionLoading() {
-      const loading = this.$store.getters.GET_PROMOTION_LOADING;
-      console.log('Loading promotion', loading);
-      return loading;
+      return this.$store.getters.GET_PROMOTION_LOADING;
+    },
+
+    promotionError() {
+      return this.$store.getters.GET_PROMOTION_ERROR;
     },
 
     imageStyle() {
-      return `background-image: url(/src/assets/${this.promotionObject.image})`;
+      if (!this.promotionObject.image) {
+        return {};
+      }
+
+      return {
+        backgroundImage: `url(/src/assets/${this.promotionObject.image})`,
+      };
     },
   },
 
@@ -73,5 +80,12 @@ export default {
 .products-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+}
+
+.error {
+  color: #b91c1c;
+  max-width: 960px;
+  margin: 0 auto 1rem;
+  padding-inline: 2rem;
 }
 </style>

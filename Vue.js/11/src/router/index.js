@@ -25,14 +25,14 @@ const router = createRouter({
       component: AboutView,
     },
     {
-      path: '/:pathMatch(.*)*',
-      name: 'NotFoundView',
-      component: NotFoundView,
-    },
-    {
       path: '/promotion/:id',
       name: 'PromotionView',
       component: PromotionView,
+    },
+    {
+      path: '/:pathMatch(.*)*',
+      name: 'NotFoundView',
+      component: NotFoundView,
     },
   ],
 });

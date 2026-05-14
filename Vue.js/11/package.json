@@ -12,7 +12,7 @@
     "axios": "^1.13.6",
     "vite-svg-loader": "^5.1.1",
     "vue": "^3.5.29",
-    "vue-router": "^5.0.3",
+    "vue-router": "^4.6.3",
     "vuex": "^4.1.0"
   },
   "devDependencies": {

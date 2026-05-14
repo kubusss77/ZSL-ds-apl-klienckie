@@ -1,7 +1,7 @@
 <template>
   <div :style="contStyle">
-    <h2>{{ this.promotion.header }}</h2>
-    <p>{{ this.promotion.description }}</p>
+    <h2>{{ promotion.header }}</h2>
+    <p>{{ promotion.description }}</p>
   </div>
 </template>
 
@@ -12,18 +12,12 @@ export default {
   computed: {
     contStyle() {
       const { image } = this.promotion;
-      let imageUrl;
-
-      console.log('image', image);
-
-      try {
-        imageUrl = `/src/assets/${image}`;
-      } catch (e) {
-        console.log(e);
-      }
+      const imageUrl = `/src/assets/${image}`;
 
       return {
         background: `url(${imageUrl})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
       };
     },
   },

@@ -1,21 +1,31 @@
 <template>
-  <a v-for="promotion in promotionsList" :href="'/promotion/' + promotion.id"
-    ><PromotionTile :promotion="promotion" class="promotion"></PromotionTile
-  ></a>
+  <div class="promotions-grid">
+    <RouterLink
+      v-for="promotion in promotionsList"
+      :key="promotion.id"
+      :to="`/promotion/${promotion.id}`"
+      class="promotion-link"
+    >
+      <PromotionTile :promotion="promotion" class="promotion" />
+    </RouterLink>
+  </div>
+  <p v-if="promotionsError" class="error">{{ promotionsError }}</p>
 </template>
 
 <script>
 import PromotionTile from '@/components/PromotionTile.vue';
 
 export default {
-  created() {
+  mounted() {
     this.$store.dispatch('FETCH_PROMOTIONS');
   },
 
   computed: {
     promotionsList() {
-      const ret = this.$store.getters.GET_PROMOTIONS_LIST;
-      return ret;
+      return this.$store.getters.GET_PROMOTIONS_LIST;
+    },
+    promotionsError() {
+      return this.$store.getters.GET_PROMOTIONS_ERROR;
     },
   },
   components: {
@@ -25,10 +35,19 @@ export default {
 </script>
 
 <style>
-.promotion {
-  margin: 1rem;
+.promotions-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1rem;
+  padding: 1rem;
 }
-a {
+.promotion-link {
+  text-decoration: none;
   color: black;
+}
+
+.error {
+  color: #b91c1c;
+  margin: 1rem;
 }
 </style>
