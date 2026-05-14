@@ -34,16 +34,19 @@ export default {
     },
   },
   mounted() {
-    const img = new Image();
-    img.onload = () => {
-      this.loading = false;
-      this.imageLoaded = true;
-    };
-    img.onerror = () => {
-      this.loading = false;
-      this.imageLoaded = true;
-    };
-    img.src = this.imageUrl;
+    const delay = Math.floor(Math.random() * 2000) + 500;
+    setTimeout(() => {
+      const img = new Image();
+      img.onload = () => {
+        this.loading = false;
+        this.imageLoaded = true;
+      };
+      img.onerror = () => {
+        this.loading = false;
+        this.imageLoaded = true;
+      };
+      img.src = this.imageUrl;
+    }, delay);
   },
   components: {
     AppRating,

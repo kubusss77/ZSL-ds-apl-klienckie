@@ -1,6 +1,13 @@
 <template>
   <div class="rating">
-    <img v-for="index in starsCount" :key="index" class="star" src="/src/assets/star.svg" alt="star" />
+    <img v-for="index in starsCount" :key="index" class="star" src="/src/assets/star.png" alt="star" />
+    <img
+      v-for="index in emptyStarsCount"
+      :key="`empty-${index}`"
+      class="star"
+      src="/src/assets/no-star.png"
+      alt="empty star"
+    />
     <span class="count">({{ ratesNumber }})</span>
   </div>
 </template>
@@ -25,6 +32,9 @@ export default {
       }
 
       return Math.min(5, Math.round(value));
+    },
+    emptyStarsCount() {
+      return 5 - this.starsCount;
     },
   },
 };

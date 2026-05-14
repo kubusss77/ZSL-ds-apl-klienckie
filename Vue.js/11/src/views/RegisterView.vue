@@ -7,14 +7,9 @@
 
       <input v-model.trim="email" type="email" placeholder="Email" autocomplete="email" />
       <input v-model="password" type="password" placeholder="Password" autocomplete="new-password" />
-      <input
-        v-model="repeatPassword"
-        type="password"
-        placeholder="Repeat password"
-        autocomplete="new-password"
-      />
+      <input v-model="repeatPassword" type="password" placeholder="Repeat password" autocomplete="new-password" />
 
-      <button type="submit" :disabled="disabled || loading">register</button>
+      <button type="submit" :disabled="loading">register</button>
     </form>
 
     <div v-show="exists" class="info">
@@ -66,6 +61,12 @@ export default {
       this.error = '';
       this.exists = false;
       this.registered = false;
+
+      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailPattern.test(this.email) || this.email.length < 4) {
+        this.error = 'Podaj poprawny adres e-mail';
+        return;
+      }
 
       if (this.password.length < 3) {
         this.error = 'Haslo musi miec minimum 3 znaki';

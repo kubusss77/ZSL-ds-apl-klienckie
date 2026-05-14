@@ -36,14 +36,12 @@ export default {
 
 <style>
 .promotions-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 1rem;
   padding: 1rem;
 }
 .promotion-link {
   text-decoration: none;
   color: black;
+  padding: 1rem;
 }
 
 .error {
